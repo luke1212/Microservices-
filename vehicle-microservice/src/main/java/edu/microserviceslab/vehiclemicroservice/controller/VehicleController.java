@@ -2,9 +2,7 @@ package edu.microserviceslab.vehiclemicroservice.controller;
 
 import edu.microserviceslab.vehiclemicroservice.entity.Vehicle;
 import edu.microserviceslab.vehiclemicroservice.service.interfaces.VehicleService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +20,11 @@ public class VehicleController {
     @RequestMapping("/list")
     public List<Vehicle> listAllVehicles() {
         return vehicleService.getAllVehicles();
+    }
+
+    @ResponseBody
+    @RequestMapping("/licensePlate/{vehicleId}")
+    public String getVehicleLicensePlate(@PathVariable("vehicleId") Long vehicleId) {
+        return vehicleService.getVehicleLicensePlate(vehicleId);
     }
 }

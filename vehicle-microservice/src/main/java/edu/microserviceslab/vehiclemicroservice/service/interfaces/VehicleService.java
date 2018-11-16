@@ -7,4 +7,6 @@ import java.util.List;
 public interface VehicleService {
 
     List<Vehicle> getAllVehicles();
+
+    String getVehicleLicensePlate(Long vehicleId);
 }
