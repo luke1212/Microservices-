@@ -41,4 +41,12 @@ public class DriverController {
 
         return licensePlate;
     }
+
+    @ResponseBody
+    @RequestMapping("/{driverId}/vehicleId")
+    public Long getDriverForVehicle(@PathVariable("driverId") Long driverId) {
+        Driver driver = driverService.getDriverById(driverId);
+
+        return driver == null ? null : driver.getVehicleId();
+    }
 }
