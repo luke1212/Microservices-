@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS Vehicle (
+CREATE TABLE IF NOT EXISTS vehicle (
   id                BIGINT AUTO_INCREMENT,
   make              CHAR(20),
   model             CHAR(20),
@@ -7,9 +7,9 @@ CREATE TABLE IF NOT EXISTS Vehicle (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS Registration (
+CREATE TABLE IF NOT EXISTS registration (
   id                BIGINT AUTO_INCREMENT,
-  license_plate     CHAR(16),
+  license_plate     CHAR(10),
   licensed_to       CHAR(128),
   PRIMARY KEY (id)
 )

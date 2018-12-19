@@ -25,12 +25,10 @@ public class UsageServiceImpl implements UsageService {
     }
 
     public List<UsageStatistic> getUsageStatisticsPerDriver(Long driverId) {
-        // TODO finish custom query
-        return usageStatisticRepo.findAll();
+        return usageStatisticRepo.findByDriverId(driverId);
     }
 
     public List<UsageStatistic> getUsageStatisticsPerVehicle(Long vehicleId) {
-        // TODO finish custom query
-        return usageStatisticRepo.findAll();
+        return usageStatisticRepo.findByVehicleId(vehicleId);
     }
 }

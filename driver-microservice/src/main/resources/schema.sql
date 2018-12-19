@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS Driver (
+CREATE TABLE IF NOT EXISTS driver (
   id                BIGINT AUTO_INCREMENT,
   first_name        CHAR(24),
   last_name         CHAR(24),

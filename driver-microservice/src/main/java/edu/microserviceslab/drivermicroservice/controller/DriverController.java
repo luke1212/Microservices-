@@ -1,12 +1,12 @@
 package edu.microserviceslab.drivermicroservice.controller;
 
 import edu.microserviceslab.drivermicroservice.common.proxies.VehicleRestProxy;
+import edu.microserviceslab.drivermicroservice.dto.DriverVehicleChangeRequest;
 import edu.microserviceslab.drivermicroservice.entity.Driver;
 import edu.microserviceslab.drivermicroservice.service.interfaces.DriverService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,9 +24,47 @@ public class DriverController {
     }
 
     @ResponseBody
+    @RequestMapping(path = "/add", method = RequestMethod.POST)
+    public Driver addDriver(@RequestBody Driver driver) {
+        if (driver == null) {
+            throw new IllegalStateException("Please submit a driver to add.");
+        }
+        if (driver.getVehicleId() == null) {
+            throw new IllegalStateException("The driver needs to have a vehicle assigned to him.");
+        }
+
+        return driverService.addDriver(driver);
+    }
+
+    @ResponseBody
+    @RequestMapping(path = "/changeVehicle", method = RequestMethod.POST)
+    public Driver changeVehicle(@RequestBody DriverVehicleChangeRequest changeRequest) {
+        if (changeRequest == null) {
+            throw new IllegalStateException("Please submit a vehicle change request.");
+        }
+        if (changeRequest.getDriverId() == null) {
+            throw new IllegalStateException("The driver's ID number must be present in a vehicle change request.");
+        }
+        if (changeRequest.getVehicleId() == null) {
+            throw new IllegalStateException("The vehicle's ID number must be present in a vehicle change request.");
+        }
+        if (StringUtils.isBlank(vehicleRestProxy.getVehicleLicensePlate(changeRequest.getVehicleId()))) {
+            throw new IllegalStateException("The vehicle does not have a valid registration.");
+        }
+
+        return driverService.changeVehicle(changeRequest);
+    }
+
+    @ResponseBody
     @RequestMapping("/list")
     public List<Driver> listAllDrivers() {
         return driverService.getAllDrivers();
+    }
+
+    @ResponseBody
+    @RequestMapping("/{driverId}")
+    public Driver getDriverById(@PathVariable("driverId") Long driverId) {
+        return driverService.getDriverById(driverId);
     }
 
     @ResponseBody

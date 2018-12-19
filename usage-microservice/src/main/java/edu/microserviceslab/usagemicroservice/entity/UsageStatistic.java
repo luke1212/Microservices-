@@ -1,5 +1,6 @@
 package edu.microserviceslab.usagemicroservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -7,7 +8,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+@Entity(name = "usage_statistic")
 public class UsageStatistic {
 
     @Id
@@ -19,6 +20,8 @@ public class UsageStatistic {
      * Date and Time variable for when the usage statistic was added
      */
     @Column(name = "created_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdDate;
 
     /**
