@@ -12,7 +12,7 @@ import java.util.Date;
 public class UsageStatistic {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
